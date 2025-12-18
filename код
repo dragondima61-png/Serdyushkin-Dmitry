@@ -1,0 +1,45 @@
+def input_matrix(rows, cols, name):
+    print(f"Введіть елементи матриці {name}:")
+    matrix = []
+    for i in range(rows):
+        row = list(map(float, input(f"Рядок {i + 1}: ").split()))
+        matrix.append(row)
+    return matrix
+
+
+def find_max_row(matrix):
+    max_value = matrix[0][0]
+    max_row_index = 0
+
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            if matrix[i][j] > max_value:
+                max_value = matrix[i][j]
+                max_row_index = i
+
+    return max_row_index
+
+
+def swap_max_rows(matrix_a, matrix_b):
+    row_a = find_max_row(matrix_a)
+    row_b = find_max_row(matrix_b)
+
+    matrix_a[row_a], matrix_b[row_b] = matrix_b[row_b], matrix_a[row_a]
+
+
+def print_matrix(matrix, name):
+    print(f"\nМатриця {name}:")
+    for row in matrix:
+        print(row)
+
+
+ROWS = 4
+COLS = 5
+
+A = input_matrix(ROWS, COLS, "A")
+B = input_matrix(ROWS, COLS, "B")
+
+swap_max_rows(A, B)
+
+print_matrix(A, "A після обміну")
+print_matrix(B, "B після обміну")
